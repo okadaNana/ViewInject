@@ -152,6 +152,10 @@ public class Views {
 }
 ```
 
+因为，我们生成代码的类名是 Activity的类名+$$ViewInjector 。比如一个 Activity 叫 HelloActivity，那么生成的代码的类名就是 HelloActivity$$ViewInjector。因此这里利用反射，根据类名的规则找到我们生成的类，调用 inject() 方法。
+
+当然，也可以不使用反射，直接调用生成好的类 HelloActivity$$ViewInjector.inject(Activity activity)，这样也是可以的。但是有个弊端，每次注解完毕只会，都需要 rebuild 一次 project，等代码生成好之后，才能调用  HelloActivity$$ViewInjector.inject(Activity activity)。这样也挺麻烦了，还是直接用注解吧。
+
 ## app
 
 build.gradle 定义如下
